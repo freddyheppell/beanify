@@ -90,23 +90,10 @@
 /*!*****************************!*\
   !*** ./src/scripts/main.js ***!
   \*****************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils */ \"./src/scripts/utils.js\");\n\nvar baconEl = document.querySelector('.bacon');\nObject(_utils__WEBPACK_IMPORTED_MODULE_0__[\"GetBacon\"])().then(function (res) {\n  var markup = res.reduce(function (acc, val) {\n    return acc += \"<p>\".concat(val, \"</p>\");\n  }, '');\n  baconEl.innerHTML = markup;\n}).catch(function (err) {\n  return baconEl.innerHTML = err;\n});\n\n//# sourceURL=webpack:///./src/scripts/main.js?");
-
-/***/ }),
-
-/***/ "./src/scripts/utils.js":
-/*!******************************!*\
-  !*** ./src/scripts/utils.js ***!
-  \******************************/
-/*! exports provided: GetBacon */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"GetBacon\", function() { return GetBacon; });\nvar GetBacon = function GetBacon() {\n  var body = fetch('https://baconipsum.com/api/?type=all-meat&paras=3').then(function (res) {\n    return res.json();\n  });\n  return body;\n};\n\n//# sourceURL=webpack:///./src/scripts/utils.js?");
+eval("var player = document.getElementById('player');\nvar canvas = document.getElementById('canvas');\nvar context = canvas.getContext('2d');\nvar captureButton = document.getElementById('beam'); // const model = tf.loadLayersModel(`${window.location.origin}/model.json`);\n\nvar constraints = {\n  video: {\n    width: 640,\n    height: 360\n  }\n};\nprepareConsent(); // get webcam consent\n\nfunction prepareConsent() {\n  var consent = captureButton.addEventListener('click', function () {\n    navigator.mediaDevices.getUserMedia(constraints).then(function (stream) {\n      player.srcObject = stream;\n      captureButton.innerHTML = \"Beam your bean\";\n      captureButton.removeEventListener('click', consent);\n      ready();\n    });\n  });\n}\n\nfunction ready() {\n  var captbutton = captureButton.addEventListener('click', function () {\n    captureButton.removeEventListener('click', captbutton);\n    capture();\n  });\n}\n\nfunction capture() {\n  context.drawImage(player, 0, 0, canvas.width, canvas.height);\n} // on button click, capture, rebind the button then hide the player\n// export the image to tensorflowjs\n// recieve the classification and display it.\n// change the button to 'beam another bean', which reloads the page.\n\n//# sourceURL=webpack:///./src/scripts/main.js?");
 
 /***/ }),
 

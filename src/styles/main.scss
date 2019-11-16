@@ -1,35 +1,74 @@
 @import 'reset.scss';
-.wrapper {
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  grid-template-rows: auto 1fr auto;
-  line-height: 23px;
-  & > * { grid-column: 2 / -2; }
-  header {
-    grid-column: 1 / -1;
-    background: #fdbc9a;
-    background-size: cover;
-    height: 500px;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    text-align: center;
-  h1 {
-      font-size: 3.5em;
-      text-shadow: -2px -2px 3px rgb(163, 162, 162);
-    }
+@import url('https://fonts.googleapis.com/css?family=Baloo&display=swap');
+
+img {
+  height: 8em;
+  max-width: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 1em;
+  position: relative;
+}
+
+#beam {
+  margin: 1em;
+  background: 0;
+  border: 0;
+  display: block;
+  background: #fff;
+  color: mix(#3023AE, #C86DD7);
+  font-family: 'Baloo';
+  font-size: 1.25em;
+  padding: 0.5em 1em;
+  border-radius: 3em;
+  position: relative;
+  z-index: 0;
+
+  &:before {
+    z-index: -5;
+    content: "";
+    background: linear-gradient(to left, #3023AE, #C86DD7);
+    display: block;
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    border-radius: calc(1.25em + 4px);
   }
-  footer {
-    height: 50px;
-    display: flex;
-    justify-content: flex-end;
+
+  &:after {
+    z-index: -4;
+    content: "";
+    background: #fff;
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: calc(100%);
+    height: calc(100%);
+    border-radius: 1.25em;
   }
 }
-.bacon > img {
-  width: 75px;
-  display: block;
-  margin: auto;
+
+.ratio {
+  width: 100%;
+  margin: 1em;
+  padding-bottom: 56.25%;
+  position: relative;
+}
+
+canvas, video {
+  border-radius: 1em;
+  background: #eee;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
 }
