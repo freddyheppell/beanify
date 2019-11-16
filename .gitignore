@@ -79,3 +79,5 @@ typings/
 
 # Serverless directories
 .serverless/
+
+public/assets/scripts/bundle.js

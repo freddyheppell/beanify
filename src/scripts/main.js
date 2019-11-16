@@ -8,7 +8,8 @@ const captureButton = document.getElementById('beam');
 const constraints = {
   video: {
     width: 640,
-    height: 360
+    height: 360,
+    facingMode: 'environment'
   },
 };
 
