@@ -5,10 +5,12 @@ const captureButton = document.getElementById('beam');
 
 // const model = tf.loadLayersModel(`${window.location.origin}/model.json`);
 
+const portrait = window.matchMedia("(orientation: portrait)").matches
+
 const constraints = {
   video: {
-    width: 640,
-    height: 360,
+    width: portrait ? 360 : 480,
+    height: portrait ? 480 : 360,
     facingMode: 'environment'
   },
 };
