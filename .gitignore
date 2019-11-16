@@ -74,25 +74,8 @@ typings/
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 
-# next.js build output
-.next
-
-# nuxt.js build output
-.nuxt
-
-# react / gatsby
-public/
-
 # vuepress build output
 .vuepress/dist
 
 # Serverless directories
 .serverless/
-
-# FuseBox cache
-.fusebox/
-
-# DynamoDB Local files
-.dynamodb/
-
-# End of https://www.gitignore.io/api/node
