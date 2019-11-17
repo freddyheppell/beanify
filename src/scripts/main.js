@@ -98,7 +98,7 @@ function analyse() {
     var det = new cv.Mat();
     var rect = cv.boundingRect(c);
     var side = (rect.width < rect.height ? rect.width : rect.height);
-    let r = new cv.Rect(rect.x -1, rect.y -1, side + 2, side + 2);
+    let r = new cv.Rect(rect.x -10, rect.y -10, side + 20, side + 20);
     det = image.roi(r);
     let resized = new cv.Mat();
     cv.resize(det, resized, new cv.Size(100, 100))
