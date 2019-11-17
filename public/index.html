@@ -4,19 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+  <!-- Load the coco-ssd model. -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
   <title>Beanify :: Thinkin' about them beans, 𝒻𝑜𝓇 𝓎𝑜𝓊.</title>
 <link rel="stylesheet" href="./assets/styles/main.css">
 </head>
 <body>
-  <img src="./assets/images/beanify.svg" />
-  <div class="ratio">
-    <video id="player" autoplay></video>
-  </div>
-  <button id="beam">Enable camera for bean beaming!</button>
-  <div class="ratio">
-    <canvas id="canvas"></canvas>
-  </div>
+  <main>
+    <img src="./assets/images/beanify.svg" />
+    <div class="hide">
+      <video id="player"autoplay></video>
+    </div>
+    <div class="ratio">
+      <canvas width="400" height="400" id="preview"></canvas>
+    </div>
+    <button id="beam">Enable camera for bean beaming!</button>
+    <div class="ratio">
+      <canvas width="100" height="100" id="canvas"></canvas>
+      <div class="overlay">
+        <div id="result"></div>
+      </div>
+    </div>
+  </main>
   <script src="./assets/scripts/bundle.js"></script>
 </body>
 </html>

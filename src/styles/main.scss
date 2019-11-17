@@ -15,6 +15,12 @@ body {
   position: relative;
 }
 
+#player {
+  height: 0;
+  opacity: 0;
+  width: 0;
+}
+
 #beam {
   margin: 1em;
   background: 0;
@@ -59,11 +65,11 @@ body {
 .ratio {
   width: 100%;
   margin: 1em;
-  padding-bottom: 56.25%;
+  padding-bottom: 100%;
   position: relative;
 }
 
-canvas, video {
+canvas, video, .overlay {
   border-radius: 1em;
   background: #eee;
   top: 0;
@@ -71,4 +77,24 @@ canvas, video {
   width: 100%;
   height: 100%;
   position: absolute;
+}
+
+.overlay {
+  background: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Baloo';
+  text-shadow: 0 2px 4px rgba(black, 0.4);
+  font-size: 2em;
+  color: white;
+}
+
+main {
+  max-width: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
