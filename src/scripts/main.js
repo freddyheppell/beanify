@@ -141,11 +141,11 @@ function capture() {
   console.log(pred);
   prediction = pred.argMax().as1D().dataSync()[0];
   notpred = pred.argMin().as1D().dataSync()[0];
+  const lbl = labels[prediction];
+  console.log({lbl, prediction})
   if (prediction == notpred) {
     result.innerHTML = "not a bean, marhaps"
   } else {
-    const lbl = labels[prediction];
-    console.log({lbl, prediction})
     result.innerHTML = lbl
   }
 }
