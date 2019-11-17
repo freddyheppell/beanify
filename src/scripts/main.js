@@ -6,37 +6,47 @@ const prevctx = preview.getContext('2d');
 const captureButton = document.getElementById('beam');
 const result = document.getElementById('result');
 
-const labels = [
-  "Probably not a bean, merhaps.",
-  "MINTSORBET",
-  "CRANBERRYANDAPPLE",
-  "STRAWBERRY",
-  "MANGO",
-  "MARSHMALLOW",
-  "PINKGRAPEFRUIT",
-  "LIQUORICE",
-  "PINACOLADA",
-  "PEACHYPIE",
-  "TROPICALPUNCH",
-  "WILDCHERRY",
-  "BLUEBERRYPIE",
-  "BUTTERSCOTCH",
-  "GRANNYSMITHAPPLE",
-  "SOUTHSEASKIWI",
-  "CARAMEL",
-  "GRAPE",
-  "SOURLEMON",
-  "COLA",
-  "TANGERINE",
-  "BANANASPLIT",
-  "COFFEE",
-  "STRAWBERRYSMOOTHIE",
-  "FRENCHVANILLA",
-  "CANDYFLOSS",
-  "WATERMELON",
-  "PEAR",
-  "LEMONANDLIME"
-]
+const BEAN_BORDER_MULT = 0.1;
+
+const labelsbad = {
+  'MINTSORBET': 0,
+  'BANNANASPLIT': 1,
+  'GRANNYSMITHAPPLE': 2,
+  'CRANBERRYANDAPPLE': 3,
+  'STRAWBERRY': 4,
+  'MANGO': 6,
+  'CHILLI': 7,
+  'MARSHMALLOW': 8,
+  'PINKGRAPEFRUIT': 10,
+  'LIQUORICE': 12,
+  'PINACOLADA': 14,
+  'PEAR': 15,
+  'BANANASPLIT': 17,
+  'FRENCHVANILLA': 18,
+  'PEACHYPIE': 20,
+  'TROPICALPUNCH': 21,
+  'WILDCHERRY': 23,
+  'LEMONANDLIME': 25,
+  'GRAPE': 26,
+  'SOURLEMON': 27,
+  'COFFEE': 29,
+  'BLUEBERRYPIE': 32,
+  'BUTTERSCOTCH': 33,
+  'SOUTHSEASKIWI': 37,
+  'CARAMEL': 40,
+  'TANGERINE': 44,
+  'STRAWBERRYSMOOTHIE': 47,
+  'COLA': 53,
+  'CANDYFLOSS': 58,
+  'WATERMELON': 62,
+  'SOUTHSEAKIWI': 72
+}
+
+const labels = {};
+
+Object.keys(labelsbad).forEach(key => {
+  labels[labelsbad[key]] = key;
+});
 
 canvas.width = 100;
 canvas.height = 100;
@@ -97,8 +107,14 @@ function analyse() {
   if (a > 10) {
     var det = new cv.Mat();
     var rect = cv.boundingRect(c);
-    var side = (rect.width < rect.height ? rect.width : rect.height);
-    let r = new cv.Rect(rect.x -10, rect.y -10, side + 20, side + 20);
+    var side = (rect.width <= rect.height ? rect.width : rect.height);
+    var bordersize = Math.round(side * BEAN_BORDER_MULT)
+    let r = new cv.Rect(
+      rect.x - bordersize,
+      rect.y - bordersize,
+      side + 2*bordersize,
+      side + 2*bordersize
+    );
     det = image.roi(r);
     let resized = new cv.Mat();
     cv.resize(det, resized, new cv.Size(100, 100))
@@ -106,13 +122,26 @@ function analyse() {
   }
 }
 
+function load(src) {
+  image = new Image();
+  image.src = src;
+  image.onload = function() {
+    context.drawImage(image, 0, 0);
+    capture();
+  }
+}
+
+window.load = load;
+
 function capture() {
   // captureButton.removeEventListener('click', capture);
   const data = tf.browser.fromPixels(context.getImageData(0, 0, canvas.width, canvas.height));
-  const prediction = model.predict(data.as4D(1, 100, 100, 3)).as1D().argMax().dataSync()[0];
-  const lbl = labels[prediction]
+  const pred = model.predict(data.as4D(1, 100, 100, 3)).argMax()
+  console.log(pred);
+  prediction = pred.as1D().dataSync()[0];
+  const lbl = labels[prediction];
   console.log({lbl, prediction})
-  result.innerHTML = labels[prediction]
+  result.innerHTML = lbl
 }
 
 // on button click, capture, rebind the button then hide the player
