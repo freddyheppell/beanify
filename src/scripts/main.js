@@ -6,8 +6,6 @@ const prevctx = preview.getContext('2d');
 const captureButton = document.getElementById('beam');
 const result = document.getElementById('result');
 
-const cv = require('opencv.js')
-
 const labels = [
   "Probably not a bean, merhaps.",
   "MINTSORBET",

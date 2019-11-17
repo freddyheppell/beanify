@@ -7,7 +7,7 @@
     "dev:assets": "webpack --watch",
     "dev:start": "node serve.js",
     "dev": "npm-run-all -p dev:*",
-    "build": "cross-env NODE_ENV=production webpack"
+    "build": "NODE_ENV=production webpack"
   },
   "repository": {
     "type": "git",
@@ -31,7 +31,6 @@
     "mini-css-extract-plugin": "^0.8.0",
     "node-sass": "^4.13.0",
     "npm-run-all": "^4.1.5",
-    "opencv.js": "^1.2.1",
     "postcss-loader": "^3.0.0",
     "postcss-preset-env": "^6.7.0",
     "sass-loader": "^8.0.0",
