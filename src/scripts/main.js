@@ -78,13 +78,14 @@ function prepareConsent() {
       captureButton.innerHTML = "Beam your bean";
       captureButton.removeEventListener('click', prepareConsent);
       captureButton.addEventListener('click', capture);
-      setInterval(beanPreview, 1000);
+      setInterval(beanPreview, 200);
     });
 }
 
 function beanPreview() {
   prevctx.drawImage(player, 0, 0, preview.width, preview.height);
   analyse();
+  capture();
 }
 
 function analyse() {
@@ -99,7 +100,7 @@ function analyse() {
 
   var preprocess = new cv.MatVector();
   var hi = new cv.Mat();
-  cv.medianBlur(thresholded, thresholded, 5);
+  // cv.medianBlur(thresholded, thresholded, 3);
   cv.findContours(thresholded, preprocess, hi, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE);
 
   c = preprocess.get(0)
@@ -136,12 +137,17 @@ window.load = load;
 function capture() {
   // captureButton.removeEventListener('click', capture);
   const data = tf.browser.fromPixels(context.getImageData(0, 0, canvas.width, canvas.height));
-  const pred = model.predict(data.as4D(1, 100, 100, 3)).argMax()
+  const pred = model.predict(data.as4D(1, 100, 100, 3))
   console.log(pred);
-  prediction = pred.as1D().dataSync()[0];
-  const lbl = labels[prediction];
-  console.log({lbl, prediction})
-  result.innerHTML = lbl
+  prediction = pred.argMax().as1D().dataSync()[0];
+  notpred = pred.argMin().as1D().dataSync()[0];
+  if (prediction == notpred) {
+    result.innerHTML = "not a bean, marhaps"
+  } else {
+    const lbl = labels[prediction];
+    console.log({lbl, prediction})
+    result.innerHTML = lbl
+  }
 }
 
 // on button click, capture, rebind the button then hide the player
