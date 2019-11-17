@@ -46,7 +46,7 @@ canvas.height = 100;
 
 var model;
 
-tf.loadLayersModel(`${window.location.origin}/model/model.json`).then((a) => { model = a });
+tf.loadLayersModel("https://storage.googleapis.com/beanify-tech/model/model.json").then((a) => { model = a });
 
 const portrait = window.matchMedia("(orientation: portrait)").matches
 
