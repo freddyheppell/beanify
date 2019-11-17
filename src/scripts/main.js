@@ -139,8 +139,8 @@ function capture() {
   const data = tf.browser.fromPixels(context.getImageData(0, 0, canvas.width, canvas.height));
   const pred = model.predict(data.as4D(1, 100, 100, 3))
   console.log(pred);
-  prediction = pred.argMax().as1D().dataSync()[0];
-  notpred = pred.argMin().as1D().dataSync()[0];
+  prediction = pred.as1D().argMax().dataSync()[0];
+  notpred = pred.as1D().argMin().dataSync()[0];
   const lbl = labels[prediction];
   console.log({lbl, prediction})
   if (prediction == notpred) {
