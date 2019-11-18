@@ -136,7 +136,11 @@ window.load = load;
 
 function capture() {
   // captureButton.removeEventListener('click', capture);
-  const data = tf.browser.fromPixels(context.getImageData(0, 0, canvas.width, canvas.height));
+  const data255 = tf.browser.fromPixels(context.getImageData(0, 0, canvas.width, canvas.height));
+  const offset = tf.scalar(127.5);
+    // Normalize the image from [0, 255] to [-1, 1].
+  const data = data255.sub(offset).div(offset);
+  // console.log(data);
   const pred = model.predict(data.as4D(1, 100, 100, 3))
   console.log(pred);
   prediction = pred.as1D().argMax().dataSync()[0];
