@@ -142,7 +142,6 @@ function capture() {
   const data = data255.div(divisor);
   // console.log(data);
   const pred = model.predict(data.as4D(1, 100, 100, 3))
-  console.log(pred);
   prediction = pred.as1D().argMax().dataSync()[0];
   notpred = pred.as1D().argMin().dataSync()[0];
   const lbl = labels[prediction];
@@ -150,7 +149,7 @@ function capture() {
   if (prediction == notpred) {
     result.innerHTML = "not a bean, marhaps"
   } else {
-    result.innerHTML = lbl
+    result.innerHTML = `${lbl} ${Math.round(pred.as1D().dataSync()[prediction] * 100)}%`
   }
 }
 
