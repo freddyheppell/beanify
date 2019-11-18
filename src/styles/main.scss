@@ -21,6 +21,12 @@ body {
   width: 0;
 }
 
+#canvas {
+  height: 0;
+  width: 0;
+  opacity: 0;
+}
+
 #beam {
   margin: 1em;
   background: 0;
