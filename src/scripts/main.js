@@ -22,7 +22,7 @@ canvas.height = 100;
 
 var model;
 
-tf.loadLayersModel("https://s3.eu-central-1.wasabisys.com/beanify/model.json").then((a) => { model = a });
+tf.loadLayersModel("https://beanify-data.freddyheppell.com/model.json").then((a) => { model = a });
 
 const portrait = window.matchMedia("(orientation: portrait)").matches
 
